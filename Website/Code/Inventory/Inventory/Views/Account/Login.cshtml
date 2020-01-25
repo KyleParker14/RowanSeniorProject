@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.Title = "Login";
+}
+
+@model Inventory.Models.Logon
+
+
+<h2>@ViewBag.Title</h2>
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+<div class="row">
+    <div class="col-md-2">
+        @Html.LabelFor(m => m.UserName)
+    </div>
+    <div class="col-md-2">
+        @Html.TextBoxFor(m => m.UserName, new {MaxLength = 20 })
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <label>Password</label>
+    </div>
+    <div class="col-md-2">
+        @Html.EditorFor(m => m.Password, new { MaxLength = 20 })
+    </div>
+</div>
+<br />
+<div class="row">
+    @* Button to login a user *@
+    <div class="col-md-2">
+        <input id="loginButton" type="submit" value="Login" maxlength="20" formaction=@Url.Action("ValidateLogin") formmethod="post" />
+    </div>
+    @* Button to sign up a user *@
+    <div class="col-md-2">
+        <input id="btnSignUp" type="button" value="SignUp" maxlength="20" onclick="location.href='@Url.Action("SignUp", "Account")'" />
+    </div>
+</div>
+
+

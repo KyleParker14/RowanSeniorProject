@@ -1,0 +1,65 @@
+﻿@model Inventory.Models.Administrators
+
+@{
+    ViewBag.Title = "Administrator";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Administration</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        @Html.Action("ChangeUsers", "Administrators")
+    </div>
+    <br />
+    <h4>Change User Roles</h4>
+    <hr />
+    <div class="row">
+        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.UserName, new { MaxLength = 20, Length = 20})
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.User_Type, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @{
+                List<SelectListItem> listItems = new List<SelectListItem>();
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Administrator",
+                    Value = "Administrator"
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Manager",
+                    Value = "Manager"
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Cashier",
+                    Value = "Cashier"
+                });
+            }
+            @Html.DropDownListFor(model => model.User_Type, listItems, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.User_Type, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-2">
+            <input type="submit" value="Submit" class="btn btn-default" formaction=@Url.Action("ChangeRole") formmethod="post" />
+        </div>
+    </div>
+    <br />
+</div>
+    
+}
+

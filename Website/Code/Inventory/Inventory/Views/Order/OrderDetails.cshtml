@@ -1,0 +1,50 @@
+﻿@model Inventory.Models.DisplayOrderDetails
+
+@{
+    ViewBag.Title = "Add Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add Products</h2>
+
+<p>
+    @Html.ActionLink("Add New Product", "CreateOrderDetail", new { id = Model.OrderID })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Unit Price
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Details)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteOrderDetails", new { orderId = item.OrderID, productId = item.ProductID }, new { onclick = "return confirm('Are you sure you wish to delete?')" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<div>
+    @Html.ActionLink("Back to Details", "Details", new { id = Model.OrderID })
+</div>
