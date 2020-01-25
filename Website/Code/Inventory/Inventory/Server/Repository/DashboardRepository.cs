@@ -22,7 +22,7 @@ namespace Inventory.DataLayer.Repository
                                                   "ifnull((SELECT SUM(od.unitprice * od.quantity) FROM orders o INNER JOIN orderdetails od " +
                                                   "ON o.orderid = od.orderid WHERE orderdate BETWEEN DATE_ADD(DATE_ADD(LAST_DAY(CURDATE()), " +
                                                   "INTERVAL 1 DAY), INTERVAL - 1 MONTH) AND LAST_DAY(CURDATE())), 0.0) AS OrderTotal, " +
-                                                  "(SELECT COUNT(*) FROM product WHERE UnitsInStock < ReorderLevel AND activeYn = 'Y') AS ProductInReorder; "))
+                                                  "(SELECT COUNT(*) FROM product WHERE UnitsInStock < ReorderLevel AND Discontinued != '1') AS ProductInReorder; "))
             {                
                 return GetRecord(command);
             }
