@@ -20,10 +20,10 @@ namespace Inventory.Controllers
             using (MySqlConnection conn = DBUtils.GetConnection())
             {
                 DashboardRepository repo = new DashboardRepository(conn);
-                dash = repo.GetData();
+                //dash = repo.GetData();
             }
 
-            return View(dash);
+            return View();
         }
 
         public ActionResult ShowChart()
